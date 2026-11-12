@@ -21,7 +21,7 @@
 if(t!=='dark'&&t!=='light'){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}
 r.dataset.theme=t;document.getElementById('tc').content=t==='dark'?'#030a2c':'#ffffff';
 try{seen=sessionStorage.getItem('sanra-links-seen');sessionStorage.setItem('sanra-links-seen','1')}catch(e){}
-if(!matchMedia('(prefers-reduced-motion: reduce)').matches){r.classList.add('anim');if(!seen)r.classList.add('first')}})();
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(function(){try{return localStorage.getItem('disp-calm')==='1'}catch(e){return false}})()){r.classList.add('anim');if(!seen)r.classList.add('first')}})();
 </script>
 <style>
 @font-face{font-family:"SanraDisplay";font-style:italic;font-weight:100 900;src:url(fonts/display-noto-i.woff2) format("woff2");font-display:swap}
@@ -212,7 +212,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 <script>
 (function(){
 'use strict';
-var root=document.documentElement,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var root=document.documentElement,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches||(function(){try{return localStorage.getItem('disp-calm')==='1'}catch(e){return false}})();
 var isDark=function(){return root.dataset.theme==='dark'};
 
 /* Fine paper grain for the pillar of light */
@@ -251,6 +251,13 @@ var mail=document.getElementById('mail'),label2=mail.querySelector('span i'),was
 mail.addEventListener('click',function(){copyText(was).then(function(ok){if(!ok)return;label2.textContent='Address copied';clearTimeout(t);t=setTimeout(function(){label2.textContent=was},2600)})});
 })();
 </script>
-<script src="kofi-nudge.js?v=2" defer data-url="https://ko-fi.com/sanraphically" data-title="Keep the lights on?" data-line="A coffee on Ko-fi supports my studies." data-cta="Support on Ko-fi" data-tone="light" data-side="left"></script>
+<script src="kofi-nudge.js?v=3" defer data-url="https://ko-fi.com/sanraphically" data-title="Keep the lights on?" data-line="A coffee on Ko-fi supports my studies." data-cta="Support on Ko-fi" data-hue="prism" data-side="left"></script>
+<script>
+window.__display={themes:[['light','Day'],['dark','Night']],
+  get:function(){return document.documentElement.dataset.theme==='dark'?'dark':'light'},
+  set:function(v){var b=document.querySelector('[data-toggle]');if(b&&window.__display.get()!==v)b.click()},
+  motion:function(){location.reload()}};
+</script>
+<script src="display.js?v=1" defer></script>
 </body>
 </html>

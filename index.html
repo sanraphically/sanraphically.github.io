@@ -17,7 +17,8 @@
 if(t!=='dark'&&t!=='light'){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}
 document.documentElement.dataset.theme=t;
 document.getElementById('tc').content=t==='dark'?'#030a2c':'#ffffff';
-if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('anim');
+var __calm;try{__calm=localStorage.getItem('disp-calm')==='1'}catch(e){}
+if(!__calm&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('anim');
 addEventListener('error',function(){document.documentElement.classList.remove('anim')})})();
 </script>
 <style>
@@ -567,7 +568,7 @@ var Seraph=(function(){
 (function(){
 'use strict';
 var root=document.documentElement;
-var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches||(function(){try{return localStorage.getItem('disp-calm')==='1'}catch(e){return false}})();
 var isDark=function(){return root.dataset.theme==='dark'};
 var rand=function(a,b){return a+Math.random()*(b-a)};
 var PASTEL=['#9fb8f2','#c9a8ee','#f2a9cd','#f7c98e','#96e0c4','#7fc8ee'];
@@ -972,6 +973,13 @@ form.addEventListener('submit',function(e){
 })();
 })();
 </script>
-<script src="kofi-nudge.js?v=2" defer data-url="https://ko-fi.com/sanraphically" data-title="Keep the lights on?" data-line="A coffee on Ko-fi supports my studies." data-cta="Support on Ko-fi" data-tone="light" data-side="left"></script>
+<script src="kofi-nudge.js?v=3" defer data-url="https://ko-fi.com/sanraphically" data-title="Keep the lights on?" data-line="A coffee on Ko-fi supports my studies." data-cta="Support on Ko-fi" data-hue="prism" data-side="left"></script>
+<script>
+window.__display={themes:[['light','Day'],['dark','Night']],
+  get:function(){return document.documentElement.dataset.theme==='dark'?'dark':'light'},
+  set:function(v){var b=document.querySelector('[data-toggle]');if(b&&window.__display.get()!==v)b.click()},
+  motion:function(){location.reload()}};
+</script>
+<script src="display.js?v=1" defer></script>
 </body>
 </html>
