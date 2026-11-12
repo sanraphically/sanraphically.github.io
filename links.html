@@ -14,7 +14,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2044%2044%22%3E%3Cg%20transform%3D%22translate%280%208%29%22%20fill%3D%22none%22%20stroke%3D%22%235f86d6%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2.50%2023.00C3.13%2022.36%203.79%2021.74%204.46%2021.15C5.14%2020.56%205.83%2019.99%206.55%2019.45C7.27%2018.90%208.01%2018.39%208.77%2017.91C9.53%2017.44%2010.32%2016.99%2011.12%2016.59C11.92%2016.18%2012.75%2015.82%2013.59%2015.50C14.43%2015.19%2015.29%2014.92%2016.16%2014.70C17.03%2014.48%2017.92%2014.31%2018.81%2014.20C19.70%2014.09%2020.60%2014.03%2021.50%2014.03C22.40%2014.03%2023.30%2014.09%2024.19%2014.20C25.08%2014.31%2025.97%2014.48%2026.84%2014.70C27.71%2014.92%2028.57%2015.19%2029.41%2015.50C30.25%2015.82%2031.08%2016.18%2031.88%2016.59C32.68%2016.99%2033.47%2017.44%2034.23%2017.91C34.99%2018.39%2035.73%2018.90%2036.45%2019.45C37.17%2019.99%2037.86%2020.56%2038.54%2021.15C39.21%2021.74%2039.87%2022.36%2040.50%2023.00M40.50%2023.00l-1.21%20-3.18M40.50%2023.00l-3.17%20-1.23M35.56%2018.04l-1.23%20-3.81M35.56%2018.04l-3.80%20-1.25M33.73%2016.19l-1.23%20-3.81M33.73%2016.19l-3.80%20-1.25%22/%3E%3C/g%3E%3C/svg%3E">
 <!--
   The link in bio. It is the first screen of the main page (index.html) with the links made large enough to tap.
-  To change a link: edit the five lines inside <ul class="rows"> below. Each line is one link.
+  To change a link: edit the six lines inside <ul class="rows"> below. Each line is one link.
 -->
 <script>
 (function(){var r=document.documentElement,t,seen;try{t=localStorage.getItem('sanra-theme')}catch(e){}
@@ -110,6 +110,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .row:hover span,.row:focus-visible span{color:var(--ink)}
 .row:hover span svg,.row:focus-visible span svg,.row:active span svg{opacity:1;transform:none}
 .row:focus-visible{outline-offset:2px}
+/* Ko-fi: its star stays lit, and now and then a bead of current runs along its line */
+.kofi::before{content:"";position:absolute;left:-64px;top:0;width:64px;height:1px;opacity:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,transparent,#e8b2dc,#ffe0a6,#a9e2ef,transparent);box-shadow:0 0 8px 1px rgba(232,178,220,.45)}
+:root[data-theme=dark] .kofi::before{background:linear-gradient(90deg,transparent,#a9c6ff,#fff,#a9c6ff,transparent);box-shadow:0 0 9px 1px rgba(150,185,255,.7)}
+.anim .kofi::before{animation:current 6.5s cubic-bezier(.45,0,.3,1) 2.6s infinite}
+.kofi span svg{opacity:1;transform:none}
+.anim .kofi span svg{animation:twinkle 6.5s ease-in-out 3.4s infinite}
+@keyframes current{0%{left:-64px;opacity:0}6%{opacity:1}34%{opacity:1}40%{left:100%;opacity:0}100%{left:100%;opacity:0}}
 
 /* Opening, first visit of a session only. The links are there from the first moment; the name draws itself beside them.
    Keyframes hold only start states, so with motion off the page is simply complete. */
@@ -192,10 +199,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
     <nav aria-label="Links">
     <ul class="rows">
       <li style="--i:0"><a class="row" href="index.html"><b>Website</b><span>See it all<svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
-      <li style="--i:1"><a class="row" href="https://www.tiktok.com/@sanraphically" rel="noopener"><b>TikTok</b><span>@sanraphically<svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
-      <li style="--i:2"><a class="row" href="https://www.instagram.com/sanraphically/" rel="noopener"><b>Instagram</b><span>@sanraphically<svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
-      <li style="--i:3"><a class="row" href="index.html#brands"><b>For brands</b><span>Work with me<svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
-      <li style="--i:4"><a class="row" id="mail" href="mailto:sanraphically@proton.me"><b>Email</b><span><i style="font-style:normal">sanraphically@proton.me</i><svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
+      <li style="--i:1"><a class="row kofi" href="https://ko-fi.com/sanraphically" rel="noopener"><b>Keep the lights on</b><span>Support my studies on Ko-fi<svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
+      <li style="--i:2"><a class="row" href="https://www.tiktok.com/@sanraphically" rel="noopener"><b>TikTok</b><span>@sanraphically<svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
+      <li style="--i:3"><a class="row" href="https://www.instagram.com/sanraphically/" rel="noopener"><b>Instagram</b><span>@sanraphically<svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
+      <li style="--i:4"><a class="row" href="index.html#brands"><b>For brands</b><span>Work with me<svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
+      <li style="--i:5"><a class="row" id="mail" href="mailto:sanraphically@proton.me"><b>Email</b><span><i style="font-style:normal">sanraphically@proton.me</i><svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
     </ul>
     </nav>
   </div>

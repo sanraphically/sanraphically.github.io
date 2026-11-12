@@ -241,6 +241,32 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .note button{color:var(--ink);padding:0}
 .note button:hover,.note button:focus-visible{border-color:var(--mark)}
 
+/* Ko-fi: a lamp on a hairline cord. A bead of current runs down the wire, the star lights, and the light pools around it.
+   The glow is its own soft pool; the wire and the star stay crisp. */
+.lamp{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 var(--gutter) clamp(5rem,13vh,8.5rem)}
+.cord{position:relative;width:150px;height:clamp(120px,19vh,180px);margin-bottom:clamp(1.4rem,3.6vh,2.2rem);pointer-events:none}
+.cord .wire{position:absolute;left:50%;top:0;bottom:12px;width:1px;margin-left:-.5px;overflow:hidden;background:linear-gradient(180deg,transparent,var(--line) 22%,var(--field));transform-origin:50% 0}
+.cord .wire::after{content:"";position:absolute;left:0;top:-48px;width:1px;height:48px;opacity:0;background:linear-gradient(180deg,transparent,var(--mark),transparent)}
+.cord .pool{position:absolute;left:50%;bottom:12px;width:150px;height:150px;margin:0 0 -75px -75px;border-radius:50%;background:radial-gradient(closest-side,rgba(252,246,189,.95),rgba(255,173,211,.34) 44%,rgba(169,222,249,.14) 70%,transparent)}
+:root[data-theme=dark] .cord .pool{background:radial-gradient(closest-side,rgba(255,255,255,.42),rgba(206,220,255,.2) 32%,rgba(255,173,211,.1) 50%,rgba(92,128,255,.18) 66%,transparent)}
+.cord svg{position:absolute;left:50%;bottom:0;width:24px;height:24px;margin-left:-12px;fill:var(--mark)}
+:root[data-theme=dark] .cord svg{fill:#fff}
+.lamp h2{font:italic var(--dw) clamp(2rem,1.5rem + 2.1vw,3.3rem)/1.14 var(--display);color:var(--ink)}
+.lamp .lede{margin:1.1rem auto 0;max-width:31rem;text-wrap:balance}
+.lamp .lede+.lede{margin-top:.8rem}
+.lamp .send{margin-top:2rem;padding:.62em 1.7em;font-size:1.02em}
+.lamp .note{margin:1.1rem auto 0;max-width:27rem}
+.anim .lamp:not(.lit) .wire{transform:scaleY(0)}
+.anim .lamp:not(.lit) .pool{opacity:0;transform:scale(.5)}
+.anim .lamp:not(.lit) .cord svg{opacity:0;transform:scale(0) rotate(-40deg)}
+.anim .lamp.lit .wire{transition:transform 1.6s var(--silk)}
+.anim .lamp.lit .wire::after{animation:current 7s cubic-bezier(.5,0,.3,1) 1.4s infinite}
+.anim .lamp.lit .cord svg{transition:opacity .4s ease 3.3s,transform .9s cubic-bezier(.2,1.6,.4,1) 3.3s;animation:twinkle 6.5s ease-in-out 4.6s infinite}
+.anim .lamp.lit .pool{transition:opacity 2s ease 3.35s,transform 2.2s var(--silk) 3.35s}
+.anim .lamp.lit .send i{animation:glow-sheen 7s var(--silk) 4.4s infinite}
+@keyframes current{0%{top:-48px;opacity:0}8%{opacity:1}28%{opacity:1}30%{top:100%;opacity:0}100%{top:100%;opacity:0}}
+@keyframes glow-sheen{0%{transform:translateX(-120%) skewX(-18deg)}18%,100%{transform:translateX(320%) skewX(-18deg)}}
+
 /* Ways in: slim ribbons of light hanging from a line */
 .ways{display:grid;grid-template-columns:5fr 3fr 4fr;padding:0 var(--gutter);border-top:1px solid var(--line)}
 .way{display:flex;flex-direction:column;justify-content:space-between;height:clamp(420px,66svh,620px);padding-bottom:clamp(1.8rem,5vh,3rem)}
@@ -361,7 +387,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 <canvas id="air" aria-hidden="true"></canvas>
 <div id="halo" aria-hidden="true"><i></i></div>
 <button class="sky-toggle" data-toggle type="button"><svg aria-hidden="true"><use href="#spark"/></svg><span class="lbl">Night</span></button>
-<nav class="thread" aria-label="Sections"><svg class="thr-star" aria-hidden="true"><use href="#spark"/></svg><a href="#top"><span>Top</span></a><a href="#light-section"><span>The light</span></a><a href="#sky-section"><span>The sky</span></a><a href="#brands"><span>For brands</span></a><a href="#ways"><span>Find me</span></a></nav>
+<nav class="thread" aria-label="Sections"><svg class="thr-star" aria-hidden="true"><use href="#spark"/></svg><a href="#top"><span>Top</span></a><a href="#light-section"><span>The light</span></a><a href="#sky-section"><span>The sky</span></a><a href="#brands"><span>For brands</span></a><a href="#kofi"><span>Ko-fi</span></a><a href="#ways"><span>Find me</span></a></nav>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="spark" viewBox="0 0 24 24"><path d="M12 0C12.5 7.8 16.2 11.5 24 12 16.2 12.5 12.5 16.2 12 24 11.5 16.2 7.8 12.5 0 12 7.8 11.5 11.5 7.8 12 0Z"/></symbol>
@@ -392,6 +418,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <li style="--i:1"><a class="lk" href="https://www.instagram.com/sanraphically/" rel="noopener">Instagram<svg aria-hidden="true"><use href="#spark"/></svg></a></li>
       <li style="--i:2"><a class="lk" href="mailto:sanraphically@proton.me">Email<svg aria-hidden="true"><use href="#spark"/></svg></a></li>
       <li style="--i:3"><a class="lk" href="#brands">For brands<svg aria-hidden="true"><use href="#spark"/></svg></a></li>
+      <li style="--i:4"><a class="lk" href="https://ko-fi.com/sanraphically" rel="noopener">Ko-fi<svg aria-hidden="true"><use href="#spark"/></svg></a></li>
     </ul>
   </div>
   <a class="down" href="#light-section" aria-label="Go down to the light"></a>
@@ -438,6 +465,15 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <p class="note rv" style="--d:.2s" id="c-note" aria-live="polite">This opens your email app with your note filled in. Nothing is sent until you press send there. You can also write to <a href="mailto:sanraphically@proton.me">sanraphically@proton.me</a>.</p>
     </form>
   </div>
+</section>
+
+<section class="lamp" id="kofi" aria-labelledby="kofi-title">
+  <div class="cord" aria-hidden="true"><i class="pool"></i><i class="wire"></i><svg><use href="#spark"/></svg></div>
+  <h2 class="rv" id="kofi-title">Keep the lights on</h2>
+  <p class="lede rv" style="--d:.08s">Off camera, I’m studying to become a power engineer, one of the people who keep electricity flowing to every home and hospital. This spring is the last stretch of my prerequisites.</p>
+  <p class="lede rv" style="--d:.16s">If my videos have brought you a little light, you can help keep mine on.</p>
+  <a class="send rv" style="--d:.24s" href="https://ko-fi.com/sanraphically" rel="noopener"><i></i><svg aria-hidden="true"><use href="#spark"/></svg><span>Support me on Ko-fi</span></a>
+  <p class="note rv" style="--d:.32s">Every coffee goes to books, gas or a late-night meal. Sharing helps just as much.</p>
 </section>
 
 <nav class="ways rvline" id="ways" aria-label="Find sanraphically">
@@ -893,13 +929,14 @@ form.addEventListener('submit',function(e){
   })},{threshold:.15,rootMargin:'0px 0px -5% 0px'});
   els.forEach(function(e){io.observe(e)});
   var br=document.querySelector('.brands');new IntersectionObserver(function(en,o){if(en[0].isIntersecting){br.classList.add('lit');o.disconnect()}},{threshold:.08}).observe(br);
+  var lp=document.querySelector('.lamp');new IntersectionObserver(function(en,o){if(en[0].isIntersecting){lp.classList.add('lit');o.disconnect()}},{threshold:.25}).observe(lp);
   var w=document.querySelector('.ways');new IntersectionObserver(function(en,o){if(en[0].isIntersecting){w.classList.add('on');o.disconnect()}},{threshold:.05}).observe(w);
 })();
 
 /* The thread and the name lifting away */
 (function(){
   var pill=document.querySelector('.sky-toggle'),lastY=scrollY;
-  var th=document.querySelector('.thread'),star=th.querySelector('.thr-star'),ids=['top','light-section','sky-section','brands','ways'],els=ids.map(function(i){return document.getElementById(i)}),tops=[],hh=1,tick=false;
+  var th=document.querySelector('.thread'),star=th.querySelector('.thr-star'),ids=['top','light-section','sky-section','brands','kofi','ways'],els=ids.map(function(i){return document.getElementById(i)}),tops=[],hh=1,tick=false;
   function measure(){var max=document.documentElement.scrollHeight-innerHeight;tops=els.map(function(e){return Math.min(max,e.getBoundingClientRect().top+scrollY)});hh=hero.offsetHeight}
   function paint(){
     tick=false;var y=scrollY,i=0;while(i<tops.length-2&&y>=tops[i+1])i++;
