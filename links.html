@@ -19,7 +19,7 @@
 <script>
 (function(){var r=document.documentElement,t,seen;try{t=localStorage.getItem('sanra-theme')}catch(e){}
 if(t!=='dark'&&t!=='light'){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}
-r.dataset.theme=t;document.getElementById('tc').content=t==='dark'?'#030a2c':'#ffffff';
+r.dataset.theme=t;document.getElementById('tc').content=t==='dark'?'#0a1030':'#ffffff';
 try{seen=sessionStorage.getItem('sanra-links-seen');sessionStorage.setItem('sanra-links-seen','1')}catch(e){}
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(function(){try{return localStorage.getItem('disp-calm')==='1'}catch(e){return false}})()){r.classList.add('anim');if(!seen)r.classList.add('first')}})();
 </script>
@@ -39,10 +39,11 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(function(){try{ret
 }
 :root[data-theme=dark]{
   color-scheme:dark;
-  --bg:#030a2c; --ink:#eaf2ff; --soft:#b3c6ee; --line:#22378f; --mark:#cfe0ff;
-  --string:linear-gradient(180deg,rgba(150,185,255,.1) 0,rgba(165,196,255,.42) 26%,rgba(205,224,255,.78) 48%,#fff 60%,rgba(190,214,255,.7) 67%,rgba(120,160,255,.32) 82%,rgba(90,130,255,0) 100%);
-  --pillar:linear-gradient(180deg,#020823 0,#0e2596 24%,#5f8cff 46%,#f7fbff 60%,#6d97ff 66%,#102aa6 82%,#030a2c 100%);
-  --spectrum:linear-gradient(90deg,#a9c6ff,#fff,#a9c6ff);
+  /* night: a twilight portal. Navy overhead, slate blue, lavender, a blush-cream glow at the horizon */
+  --bg:#0a1030; --ink:#f3f0ff; --soft:#c0bde6; --line:#353a7c; --mark:#ddd5ff;
+  --string:linear-gradient(180deg,rgba(176,166,255,.1) 0,rgba(194,182,255,.42) 26%,rgba(236,214,242,.8) 48%,#fff 60%,rgba(238,202,228,.7) 67%,rgba(150,138,240,.32) 82%,rgba(120,110,240,0) 100%);
+  --pillar:linear-gradient(180deg,#080d28 0,#2c2f7e 24%,#9a8fd8 46%,#fff7f1 60%,#ecc0d4 66%,#3c3a8c 82%,#0a1030 100%);
+  --spectrum:linear-gradient(90deg,#cbbdff,#fff,#f0c8dc);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -55,12 +56,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 
 /* The first screen of the main page: a blank page, a line, the name, a harp of light */
 .hero{--hh:max(100svh,640px);--h:calc(var(--hh)*.4);--lw:clamp(340px,36vw,580px);position:relative;min-height:var(--hh);overflow:hidden;background:var(--bg);padding:calc(var(--h) + clamp(2rem,5.5vh,3.4rem)) var(--gutter) clamp(2.4rem,7vh,4rem)}
-:root[data-theme=dark] .hero{background:radial-gradient(62% 26% at 27% 40%,rgba(58,98,238,.3),transparent 72%),radial-gradient(26% 46% at 79% 40%,rgba(92,128,255,.2),transparent 74%),linear-gradient(180deg,#020823 0,#040f3f 28%,#081a66 40%,#050f45 58%,var(--bg) 100%)}
+:root[data-theme=dark] .hero{background:radial-gradient(30% 9% at 79% var(--h),rgba(255,238,228,.5),rgba(232,188,218,.24) 46%,transparent 76%),radial-gradient(72% 15% at 42% var(--h),rgba(190,166,228,.32),transparent 72%),linear-gradient(180deg,#060a24 0,#0d1640 calc(var(--h)*.44),#1f2862 calc(var(--h)*.74),#454785 calc(var(--h)*.91),#6e66a8 calc(var(--h) - 1px),#272a62 calc(var(--h) + 1px),#141a48 calc(var(--h) + 30vh),var(--bg) calc(var(--h) + 75vh))}
 :root[data-theme=dark] .hero::before{content:"";position:absolute;inset:0;background-image:var(--grain,none);background-size:110px;opacity:.1;mix-blend-mode:overlay;pointer-events:none}
 .aura{position:absolute;inset:0;pointer-events:none;background:radial-gradient(22% 40% at 78% 40%,rgba(203,196,250,.2),transparent 72%),radial-gradient(26% 5% at 78% 40%,rgba(255,228,196,.24),transparent 74%),radial-gradient(24% 26% at 80% 60%,rgba(180,236,226,.16),transparent 74%)}
 :root[data-theme=dark] .aura{display:none}
 .horizon{position:absolute;left:0;right:0;top:var(--h);height:1px;background:var(--line);z-index:1;transform-origin:left}
-:root[data-theme=dark] .horizon{background:rgba(190,214,255,.5);box-shadow:0 0 14px rgba(140,180,255,.5)}
+:root[data-theme=dark] .horizon{background:rgba(250,230,240,.66);box-shadow:0 0 14px rgba(222,186,236,.6)}
 
 .harp{--up:calc(var(--h)*.9);--down:calc((var(--hh) - var(--h))*.94);--p:7px;position:absolute;top:0;height:var(--hh);right:9vw;display:flex;z-index:2}
 .s{position:relative;width:var(--p);height:100%}
@@ -74,9 +75,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .name a{display:block;position:relative}
 .lockup{display:block;width:100%;height:auto;overflow:visible}
 .over{position:absolute;inset:0}
-:root[data-theme=dark] .lockup:not(.over){filter:drop-shadow(0 0 5px rgba(255,176,222,.5)) drop-shadow(0 0 20px rgba(98,128,255,.75))}
+:root[data-theme=dark] .lockup:not(.over){filter:drop-shadow(0 0 5px rgba(255,180,222,.5)) drop-shadow(0 0 20px rgba(120,100,240,.75))}
 .fl{fill:none;stroke:url(#iris);stroke-width:var(--sw);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
-:root[data-theme=dark] .fl{stroke:#dbe8ff}
+:root[data-theme=dark] .fl{stroke:#ece4ff}
 .barb{stroke-width:calc(var(--sw)*.6)}
 .g{fill:url(#word);stroke:url(#word);stroke-width:calc(var(--sw)*.7);stroke-opacity:0;stroke-dasharray:1;stroke-dashoffset:0}
 :root[data-theme=dark] .g{fill:url(#neon);stroke:url(#neon)}
@@ -112,7 +113,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .row:focus-visible{outline-offset:2px}
 /* Ko-fi: its star stays lit, and now and then a bead of current runs along its line */
 .kofi::before{content:"";position:absolute;left:-64px;top:0;width:64px;height:1px;opacity:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,transparent,#e8b2dc,#ffe0a6,#a9e2ef,transparent);box-shadow:0 0 8px 1px rgba(232,178,220,.45)}
-:root[data-theme=dark] .kofi::before{background:linear-gradient(90deg,transparent,#a9c6ff,#fff,#a9c6ff,transparent);box-shadow:0 0 9px 1px rgba(150,185,255,.7)}
+:root[data-theme=dark] .kofi::before{background:linear-gradient(90deg,transparent,#cbbdff,#fff,#f0c8dc,transparent);box-shadow:0 0 9px 1px rgba(196,176,255,.7)}
 .anim .kofi::before{animation:current 6.5s cubic-bezier(.45,0,.3,1) 2.6s infinite}
 .kofi span svg{opacity:1;transform:none}
 .anim .kofi span svg{animation:twinkle 6.5s ease-in-out 3.4s infinite}
@@ -174,7 +175,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.glint{opacity:0}}
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
 ::view-transition-new(root){z-index:2}
+/* Reading highlight (reading-highlight.css/.js): faded ahead, one line lit in
+   periwinkle (a lavender-to-periwinkle gradient at night), full ink once read */
+:root{--rh-ink:var(--ink);--rh-bg:var(--bg);--rh-active:var(--mark)}
+:root[data-theme=dark]{--rh-active-gradient:linear-gradient(90deg,#ddd5ff,#c0bde6 50%,#7693cc)}
+:root.calm [data-rh],:root.hc [data-rh]{--rh-off:1}
 </style>
+<link rel="stylesheet" href="reading-highlight.css?v=2">
+<script src="reading-highlight.js?v=3" defer></script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -182,7 +190,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <symbol id="flight" viewBox="0 0 44 26"><path pathLength="1" d="M2.50 23.00C3.13 22.36 3.79 21.74 4.46 21.15C5.14 20.56 5.83 19.99 6.55 19.45C7.27 18.90 8.01 18.39 8.77 17.91C9.53 17.44 10.32 16.99 11.12 16.59C11.92 16.18 12.75 15.82 13.59 15.50C14.43 15.19 15.29 14.92 16.16 14.70C17.03 14.48 17.92 14.31 18.81 14.20C19.70 14.09 20.60 14.03 21.50 14.03C22.40 14.03 23.30 14.09 24.19 14.20C25.08 14.31 25.97 14.48 26.84 14.70C27.71 14.92 28.57 15.19 29.41 15.50C30.25 15.82 31.08 16.18 31.88 16.59C32.68 16.99 33.47 17.44 34.23 17.91C34.99 18.39 35.73 18.90 36.45 19.45C37.17 19.99 37.86 20.56 38.54 21.15C39.21 21.74 39.87 22.36 40.50 23.00M40.50 23.00l-1.21 -3.18M40.50 23.00l-3.17 -1.23M35.56 18.04l-1.23 -3.81M35.56 18.04l-3.80 -1.25M33.73 16.19l-1.23 -3.81M33.73 16.19l-3.80 -1.25"/></symbol>
 </svg>
 
-<main class="hero" id="top">
+<main class="hero" id="top" data-rh-scope>
   <div class="aura"></div>
   <div class="horizon"></div>
   <div class="harp" aria-hidden="true"><span class="s" style="--u:0.150;--d:0.220;--i:0"><i></i></span><span class="s" style="--u:0.160;--d:0.226;--i:1"><i></i></span><span class="s" style="--u:0.173;--d:0.236;--i:2"><i></i></span><span class="s" style="--u:0.188;--d:0.249;--i:3"><i></i></span><span class="s" style="--u:0.204;--d:0.264;--i:4"><i></i></span><span class="s" style="--u:0.221;--d:0.281;--i:5"><i></i></span><span class="s" style="--u:0.238;--d:0.299;--i:6"><i></i></span><span class="s" style="--u:0.256;--d:0.319;--i:7"><i></i></span><span class="s" style="--u:0.274;--d:0.341;--i:8"><i></i></span><span class="s" style="--u:0.291;--d:0.363;--i:9"><i></i></span><span class="s" style="--u:0.310;--d:0.387;--i:10"><i></i></span><span class="s" style="--u:0.328;--d:0.411;--i:11"><i></i></span><span class="s" style="--u:0.348;--d:0.437;--i:12"><i></i></span><span class="s" style="--u:0.369;--d:0.464;--i:13"><i></i></span><span class="s" style="--u:0.391;--d:0.491;--i:14"><i></i></span><span class="s" style="--u:0.415;--d:0.520;--i:15"><i></i></span><span class="s" style="--u:0.441;--d:0.549;--i:16"><i></i></span><span class="s" style="--u:0.469;--d:0.580;--i:17"><i></i></span><span class="s" style="--u:0.500;--d:0.611;--i:18"><i></i></span><span class="s" style="--u:0.535;--d:0.642;--i:19"><i></i></span><span class="s" style="--u:0.572;--d:0.675;--i:20"><i></i></span><span class="s" style="--u:0.612;--d:0.708;--i:21"><i></i></span><span class="s" style="--u:0.656;--d:0.743;--i:22"><i></i></span><span class="s" style="--u:0.702;--d:0.777;--i:23"><i></i></span><span class="s" style="--u:0.750;--d:0.813;--i:24"><i></i></span><span class="s" style="--u:0.801;--d:0.849;--i:25"><i></i></span><span class="s" style="--u:0.853;--d:0.886;--i:26"><i></i></span><span class="s" style="--u:0.907;--d:0.923;--i:27"><i></i></span><span class="s" style="--u:0.962;--d:0.961;--i:28"><i></i></span><span class="s" style="--u:1.018;--d:1.000;--i:29"><i></i></span><div class="pillar"></div></div>
@@ -195,9 +203,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   </h1>
 
   <div class="intro">
-    <p class="tag"><span class="w" style="--i:0">A</span> <span class="w" style="--i:1">small</span> <span class="w" style="--i:2">devotion</span> <span class="w" style="--i:3">to</span> <span class="w" style="--i:4">light.</span></p>
+    <p class="tag" data-rh-skip><span class="w" style="--i:0">A</span> <span class="w" style="--i:1">small</span> <span class="w" style="--i:2">devotion</span> <span class="w" style="--i:3">to</span> <span class="w" style="--i:4">light.</span></p>
     <nav aria-label="Links">
-    <ul class="rows">
+    <ul class="rows" data-rh>
       <li style="--i:0"><a class="row" href="index.html"><b>Website</b><span>See it all<svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
       <li style="--i:1"><a class="row kofi" href="https://ko-fi.com/sanraphically" rel="noopener"><b>Keep the lights on</b><span>Support my studies on Ko-fi<svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
       <li style="--i:2"><a class="row" href="https://www.tiktok.com/@sanraphically" rel="noopener"><b>TikTok</b><span>@sanraphically<svg aria-hidden="true"><use href="#spark"/></svg></span></a></li>
@@ -232,7 +240,7 @@ strings.forEach(function(s,i){
 /* Day and night, shared with the main page */
 var b=document.querySelector('[data-toggle]'),tc=document.getElementById('tc');
 function label(){var d=isDark();b.querySelector('.lbl').textContent=d?'Day':'Night';b.setAttribute('aria-label',d?'Switch to day':'Switch to night')}
-function apply(next){root.dataset.theme=next;tc.content=next==='dark'?'#030a2c':'#ffffff';try{localStorage.setItem('sanra-theme',next)}catch(e){}label()}
+function apply(next){root.dataset.theme=next;tc.content=next==='dark'?'#0a1030':'#ffffff';try{localStorage.setItem('sanra-theme',next)}catch(e){}label()}
 label();
 b.addEventListener('click',function(e){
   b.classList.add('sw');setTimeout(function(){b.classList.remove('sw')},1000);
@@ -252,6 +260,7 @@ mail.addEventListener('click',function(){copyText(was).then(function(ok){if(!ok)
 })();
 </script>
 <script src="kofi-nudge.js?v=3" defer data-url="https://ko-fi.com/sanraphically" data-title="Keep the lights on?" data-line="A coffee on Ko-fi supports my studies." data-cta="Support on Ko-fi" data-hue="prism" data-side="left"></script>
+<script src="kofi-panel.js?v=1" defer data-url="https://ko-fi.com/sanraphically" data-title="Keep the lights on" data-line="If my videos have brought you a little light, you can help keep mine on." data-serif="SanraDisplay,Georgia,serif" data-sans="SanraText,Georgia,serif" data-hue="prism"></script>
 <script>
 window.__display={themes:[['light','Day'],['dark','Night']],
   get:function(){return document.documentElement.dataset.theme==='dark'?'dark':'light'},

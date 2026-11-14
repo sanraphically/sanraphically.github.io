@@ -33,7 +33,7 @@
     'void main(){float A=R.x/R.y;vec2 uv=gl_FragCoord.xy/R,p=(uv-.5)*vec2(A,1.);',
     'vec2 v=p-C;float d=length(v)-RP,th=atan(v.x,v.y),t0=atan(S.x-C.x,S.y-C.y),dt=th-t0,sd=length(p-S);',
     /* deep space, and the thin air above the world */
-    'float nb=fb3(p*2.3+vec2(T*.006,-T*.004));vec3 col=mix(vec3(.008,.010,.046),vec3(.05,.04,.17),smoothstep(.34,.82,nb));',
+    'float nb=fb3(p*2.3+vec2(T*.006,-T*.004));vec3 col=mix(vec3(.022,.03,.11),vec3(.08,.07,.22),smoothstep(.34,.82,nb));',
     'float glowArc=.32+.68*exp(-dt*dt*6.);',
     'col+=vec3(.17,.10,.38)*exp(-max(d,0.)*5.2)*(.4+.6*exp(-dt*dt*5.));',
     'if(d<.012){float z=max(-d,0.),vv=sqrt(z*2./RP);vec2 s=vec2(dt*RP*1.25,vv*RP*1.25);',
@@ -78,8 +78,9 @@
 
   var AURORA = HEAD + [
     'void main(){float A=R.x/R.y;vec2 uv=gl_FragCoord.xy/R,p=vec2((uv.x-.5)*A,uv.y);',
-    'vec3 c=mix(vec3(.06,.36,.50),vec3(.04,.20,.44),smoothstep(0.,.5,uv.y));c=mix(c,vec3(.02,.08,.27),smoothstep(.45,1.,uv.y));',
-    'float h=fb3(p*2.1+vec2(T*.012,-T*.006));c+=vec3(.05,.13,.17)*smoothstep(.35,.8,h)*smoothstep(0.,.6,1.-uv.y);',
+    /* twilight: lavender at the horizon, slate blue, navy overhead, a blush haze drifting low */
+    'vec3 c=mix(vec3(.30,.26,.52),vec3(.12,.15,.40),smoothstep(0.,.5,uv.y));c=mix(c,vec3(.035,.05,.17),smoothstep(.45,1.,uv.y));',
+    'float h=fb3(p*2.1+vec2(T*.012,-T*.006));c+=vec3(.11,.06,.12)*smoothstep(.35,.8,h)*smoothstep(0.,.6,1.-uv.y);',
     'float e=smoothstep(1.,.74,uv.y);gl_FragColor=done(c,e);}'
   ].join('\n');
 
